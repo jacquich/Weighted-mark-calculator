@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weighted Mark Calculator</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+    input[type="number"] {
+      width: 60px;
+    }
+    tfoot td {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<h3>Weighted Mark Calculator</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Assessment</th>
+      <th>Raw Mark</th>
+      <th>Total Possible</th>
+      <th>Weight (%)</th>
+      <th>Weighted Mark</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Test One</td>
+      <td><input type="number" id="raw1" oninput="calculate()"></td>
+      <td>60</td>
+      <td>35</td>
+      <td id="weighted1">0</td>
+    </tr>
+    <tr>
+      <td>Test Two</td>
+      <td><input type="number" id="raw2" oninput="calculate()"></td>
+      <td>60</td>
+      <td>35</td>
+      <td id="weighted2">0</td>
+    </tr>
+    <tr>
+      <td>Aleki Part One</td>
+      <td><input type="number" id="raw3" oninput="calculate()"></td>
+      <td>12</td>
+      <td>12</td>
+      <td id="weighted3">0</td>
+    </tr>
+    <tr>
+      <td>Aleki Part Two</td>
+      <td><input type="number" id="raw4" oninput="calculate()"></td>
+      <td>18</td>
+      <td>18</td>
+      <td id="weighted4">0</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="4">Total Weighted Mark</td>
+      <td id="total">0</td>
+    </tr>
+  </tfoot>
+</table>
+
+<script>
+  function calculate() {
+    const totals = [60, 60, 12, 18];
+    const weights = [35, 35, 12, 18];
+    let totalWeighted = 0;
+
+    for (let i = 1; i <= 4; i++) {
+      const raw = parseFloat(document.getElementById(`raw${i}`).value) || 0;
+      const weighted = (raw / totals[i - 1]) * weights[i - 1];
+      document.getElementById(`weighted${i}`).innerText = weighted.toFixed(2);
+      totalWeighted += weighted;
+    }
+
+    document.getElementById("total").innerText = totalWeighted.toFixed(2);
+  }
+</script>
+
+</body>
+</html>
